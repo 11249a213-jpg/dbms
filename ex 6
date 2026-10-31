@@ -1,67 +1,102 @@
-JOINS
+Classification of Oracle Functions
 
-1. INNER JOIN
-SELECT s.student_id, s.student_name, d.dept_name
-FROM Students s
-INNER JOIN Departments d
-ON s.dept_id = d.dept_id;
+1. Character Functions
+1.1UPPER()
+SELECT UPPER('oracle database') FROM dual;
+1.2LOWER()
+SELECT LOWER('ORACLE DATABASE') FROM dual;
+1.3INITCAP()
+SELECT INITCAP('oracle database management') FROM dual;
+1.4 LENGTH()
+SELECT LENGTH('DATABASE') FROM dual;
+1.5SUBSTR()
+SELECT SUBSTR('DATABASE', 1, 4) FROM dual;
+1.6 INSTR()
+SELECT INSTR('DATABASE', 'A') FROM dual;
+1.7 REPLACE()
+SELECT REPLACE('ORACLE DATABASE', 'DATABASE', 'DBMS')
+FROM dual;
+1.8 CONCAT()
+SELECT CONCAT('Oracle', ' Database') FROM dual;
+1.9  TRIM()
+SELECT TRIM(' Oracle ') FROM dual;
+1.10 LTRIM()
+SELECT LTRIM(' Oracle') FROM dual;
+1.11 RTRIM()
+SELECT RTRIM('Oracle ') FROM dual;
 
-2.LEFT JOIN
-SELECT s.student_id, s.student_name, d.dept_name
-FROM Students s
-LEFT JOIN Departments d
-ON s.dept_id = d.dept_id;
+2.Numeric Functions
 
-3.RIGHT JOIN
-SELECT s.student_id, s.student_name, d.dept_name
-FROM Students s
-RIGHT JOIN Departments d
-ON s.dept_id = d.dept_id;
+2.1 ROUND()
+SELECT ROUND(45.6789, 2) FROM dual;
+2.2 TRUNC()
+SELECT TRUNC(45.6789, 2) FROM dual;
+2.3 CEIL()
+SELECT CEIL(45.2) FROM dual;
+2.4 FLOOR()
+SELECT FLOOR(45.8) FROM dual;
+2.5 MOD()
+SELECT MOD(10, 3) FROM dual;
+2.6 ABS()
+SELECT ABS(-25) FROM dual;
+2.7 POWER()
+SELECT POWER(2, 3) FROM dual;
+2.8 SQRT()
+SELECT SQRT(25) FROM dual;
+2.9 SIGN()
+SELECT SIGN(-50) FROM dual;
 
-4.FULL OUTER JOIN
-SELECT s.student_id, s.student_name, d.dept_name
-FROM Students s
-FULL OUTER JOIN Departments d
-ON s.dept_id = d.dept_id;
+3.DATE FUNCTIONS
+3.1 SYSDATE
+SELECT SYSDATE FROM dual;
+3.2 CURRENT_DATE
+SELECT CURRENT_DATE FROM dual;
+3.3.ADD_MONTHS()
+SELECT ADD_MONTHS(SYSDATE, 3)
+FROM dual;
+3.4 MONTHS_BETWEEN()
+SELECT MONTHS_BETWEEN(
+DATE '2026-12-01',
+DATE '2026-09-01'
+)
+FROM dual;
+3.5 LAST_DAY()
+SELECT LAST_DAY(SYSDATE)
+FROM dual;
+3.6 NEXT_DAY()
+SELECT NEXT_DAY(SYSDATE, 'MONDAY')
+FROM dual;
+3.7 ROUND() with dates
+SELECT ROUND(SYSDATE, 'MONTH')
+FROM dual;
+3.8 TRUNC() with dates
+SELECT TRUNC(SYSDATE, 'MONTH')
+FROM dual;
 
-5. CROSS JOIN
-SELECT s.student_name, d.dept_name
-FROM Students s
-CROSS JOIN Departments d;
+4.CONVERSION FUNCTIONS
+4.1 TO_CHAR()
+Number
+SELECT TO_CHAR(12345.67, '99,999.99')
+FROM dual;
 
-6. SELF JOIN
-SELECT
-e.emp_name AS Employee,
-m.emp_name AS Manager
-FROM Employees e
-LEFT JOIN Employees m
-ON e.manager_id = m.emp_id;
+Date
+SELECT TO_CHAR(SYSDATE, 'DD-MM-YYYY')
+FROM dual;
+4.2  TO_DATE()
+SELECT TO_DATE('25-09-2026', 'DD-MM-YYYY')
+FROM dual;
+4.3 TO_NUMBER()
+SELECT TO_NUMBER('500') + 100
+FROM dual;
 
-7.INNER JOIN with Condition
-SELECT s.student_id, s.student_name, d.dept_name
-FROM Students s
-INNER JOIN Departments d
-ON s.dept_id = d.dept_id
-WHERE d.dept_name = 'CSE';
-
- 8.JOIN + WHERE
-SELECT s.student_name
-FROM Students s
-INNER JOIN Departments d
-ON s.dept_id = d.dept_id
-WHERE d.dept_name = 'IT';
-
-9 JOIN + ORDER BY
-SELECT s.student_name, d.dept_name
-FROM Students s
-INNER JOIN Departments d
-ON s.dept_id = d.dept_id
-ORDER BY d.dept_name ASC;
-
-10 JOIN + COUNT
-SELECT d.dept_name,
-COUNT(s.student_id) AS total_students
-FROM Departments d
-LEFT JOIN Students s
-ON d.dept_id = s.dept_id
-GROUP BY d.dept_name;
+5.AGGREGATE/GROUP FUNCTIONS
+5.1 COUNT()
+SELECT COUNT(*) FROM students;
+5.2 SUM()
+SELECT SUM(marks) FROM students;
+5.3 AVG()
+SELECT AVG(marks) FROM students;
+5.4 MAX()
+SELECT MAX(marks) FROM students;
+5.5 MIN()
+SELECT MIN(marks) FROM students;
